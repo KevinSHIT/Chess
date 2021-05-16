@@ -1,9 +1,6 @@
 package Gui;
 
-import ADT.ChessSet;
-import ADT.Coordinate;
-import ADT.Piece;
-import ADT.Player;
+import ADT.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -84,7 +81,17 @@ public class ChessSetGui extends JFrame implements ActionListener
         {
             boolean b = cs.move(current, next);
             if (b)
-                flush();
+            {
+                if (cs.getPiece(next).getPieceType() == PieceType.Pawn &&
+                        (next.getY() == 0 || next.getY() == 7))
+                {
+                    PromotionChoice pc = new PromotionChoice(cs, -cs.getCurrentPlayer());
+                    Piece p = pc.getPiece();
+                    p.setCurrentCoordinate(next);
+                    cs.setPiece(next, p);
+                }
+            }
+            flush();
             System.out.println(b);
             current = null;
         }
