@@ -2,7 +2,7 @@ package Test;
 
 import ADT.ChessSet;
 import ADT.Coordinate;
-import Foundamental.Player;
+import ADT.Player;
 import Pieces.*;
 
 public class ChessSetTest

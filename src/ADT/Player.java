@@ -1,4 +1,4 @@
-package Foundamental;
+package ADT;
 
 public class Player
 {

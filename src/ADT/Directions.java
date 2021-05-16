@@ -1,6 +1,5 @@
 package ADT;
 
-
 public class Directions
 {
     // Horizontal
