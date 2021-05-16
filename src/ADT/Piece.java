@@ -77,12 +77,12 @@ public abstract class Piece
 
     public boolean move(Coordinate co)
     {
-        setIsMoved();
         if (!isValidMove(co))
         {
             return false;
         }
 
+        setIsMoved();
         unsafeMove(co);
         return true;
     }
@@ -104,7 +104,7 @@ public abstract class Piece
         currCo = co;
     }
 
-    public List<Coordinate> getValidCoordinatesByDirections( List<IFunc<Coordinate, Coordinate>> directions)
+    public List<Coordinate> getValidCoordinatesByDirections(List<IFunc<Coordinate, Coordinate>> directions)
     {
         List<Coordinate> valid = new ArrayList<>();
         for (IFunc<Coordinate, Coordinate> direction : directions)

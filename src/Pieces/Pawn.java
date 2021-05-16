@@ -12,27 +12,28 @@ public class Pawn extends Piece
         super(csIn, co, colourIn);
     }
 
+    private boolean isNoPiece(Coordinate co)
+    {
+        ChessSet cs = getChessSet();
+        return cs.getPiece(co) == null;
+    }
+
     @Override
     public List<Coordinate> getValidCoordinates()
     {
+        ChessSet cs = getChessSet();
         List<Coordinate> l = new ArrayList<>();
         Coordinate target = new Coordinate(getCurrentCoordinate().getX(), getCurrentCoordinate().getY() + getColour());
-        if (super.validSquare(target))
+        if (cs.isInside(target) && isNoPiece(target))
         {
             l.add(target);
-        }
-        int base = 1;
-        if (getColour() == Player.BLACK)
-        {
-            base = 6;
-        }
-
-        if (getCurrentCoordinate().getY() == base)
-        {
-            Coordinate dob = new Coordinate(getCurrentCoordinate().getX(), getCurrentCoordinate().getY() + 2 * getColour());
-            if (super.validSquare(dob))
+            if (!getIsMoved())
             {
-                l.add(dob);
+                Coordinate dob = new Coordinate(getCurrentCoordinate().getX(), getCurrentCoordinate().getY() + 2 * getColour());
+                if (isNoPiece(dob))
+                {
+                    l.add(dob);
+                }
             }
         }
 
