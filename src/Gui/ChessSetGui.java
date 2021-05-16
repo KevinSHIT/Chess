@@ -18,13 +18,12 @@ public class ChessSetGui extends JFrame implements ActionListener
     public ChessSetGui()
     {
         super("Chess");
+        setSize(720, 720);
+        setLayout(new GridLayout(9, 9));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         cs = new ChessSet();
 
-        setSize(720, 720);
-
-        // FIXME: Loss 1 col
-        setLayout(new GridLayout(9, 9));
         for (int y = 8 - 1; y >= 0; --y)
         {
             add(new JLabel(Integer.toString(y + 1), JLabel.CENTER));
@@ -40,6 +39,7 @@ public class ChessSetGui extends JFrame implements ActionListener
             }
         }
 
+        // FIXME: WRONG ORDER
         for (int x = 0; x <= 8; ++x)
         {
             add(new JLabel(Character.toString((char) ('A' + x))), JLabel.CENTER);
@@ -50,9 +50,7 @@ public class ChessSetGui extends JFrame implements ActionListener
         // addItemToPanel(pnl,lblCurrentPlayer, 8, 1, 2, 1, 0,0,0,0);
 
         flush();
-
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void flush()
