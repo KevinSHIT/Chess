@@ -16,6 +16,7 @@ public class Knight extends Piece
     public List<Coordinate> getValidCoordinates()
     {
         List<Coordinate> l = new ArrayList<>();
+        List<Coordinate> valid = new ArrayList<>();
         l.add(new Coordinate(getCurrentCoordinate().getX() + 2, getCurrentCoordinate().getY() + 1));
         l.add(new Coordinate(getCurrentCoordinate().getX() + 2, getCurrentCoordinate().getY() - 1));
         l.add(new Coordinate(getCurrentCoordinate().getX() - 2, getCurrentCoordinate().getY() + 1));
@@ -27,10 +28,11 @@ public class Knight extends Piece
 
         for (Coordinate c : l)
         {
-            if (!validSquare(c))
-                l.remove(c);
+            if (validSquare(c))
+                valid.add(c);
         }
-        return l;
+        l = null; // TODO: GC
+        return valid;
     }
 
     @Override
