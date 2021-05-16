@@ -1,12 +1,8 @@
 # Chess Game in Java
 
-## Compile Warning
-
-Set BlueJ to UTF-8 in order to compiler.
-
-FIXME: BlueJ may also face font miss.
-
 ## Font Issue
+
+***MAKE SURE `Dialog.bold` FONT HAS BEEN INSTALLED***
 
 | System | Situation |
 | :----: | :-------: |
