@@ -18,13 +18,15 @@ public class PromotionChoice extends JDialog implements ActionListener
     public PromotionChoice(ChessSet chessSet, int playerColour)
     {
         super();
+        setTitle("Promotion Choice");
+        setSize(300, 200);
+        setModal(true);
+        setLayout(new GridLayout(0, 1));
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         colour = playerColour;
         cs = chessSet;
 
-        setSize(300, 200);
-
-        setModal(true);
         ButtonGroup btnGroup = new ButtonGroup();
         JRadioButton rdoQueen = new JRadioButton("Queen", true);
         JRadioButton rdoCastle = new JRadioButton("Castle");
@@ -43,8 +45,6 @@ public class PromotionChoice extends JDialog implements ActionListener
         btnGroup.add(rdoKnight);
         btnGroup.add(rdoBishop);
 
-        setLayout(new GridLayout(0, 1));
-
         add(rdoQueen);
         add(rdoCastle);
         add(rdoKnight);
@@ -54,8 +54,6 @@ public class PromotionChoice extends JDialog implements ActionListener
         btnOk.setActionCommand("OK");
         btnOk.addActionListener(this);
         add(btnOk);
-
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public Piece getPiece()
