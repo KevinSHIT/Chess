@@ -30,7 +30,9 @@ public class FrmChessSet extends JFrame implements ActionListener
             for (int x = 0; x < 8; ++x)
             {
                 btnPieces[x][y] = new JButton();
-                btnPieces[x][y].setFont(new Font("Segoe UI Symbol", Font.BOLD, 32)); //TODO
+                // TODO: FIX FONT
+                Font font = btnPieces[x][y].getFont();
+                btnPieces[x][y].setFont(new Font(font.getFontName(), Font.BOLD, 32)); //TODO
                 btnPieces[x][y].setActionCommand(x + " " + y);
                 btnPieces[x][y].addActionListener(this);
                 btnPieces[x][y].setFocusPainted(false);
