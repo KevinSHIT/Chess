@@ -4,6 +4,7 @@ public class Coordinate
 {
     private int x, y;
 
+
     public Coordinate(int xIn, int yIn)
     {
         x = xIn;
@@ -17,6 +18,7 @@ public class Coordinate
         y = yIn - 1;
     }
 
+
     public int getX()
     {
         return x;
@@ -26,6 +28,7 @@ public class Coordinate
     {
         return y;
     }
+
 
     @Override
     public String toString()

@@ -6,58 +6,27 @@ import java.util.List;
 public abstract class Piece
 {
     int colour;
-
-    public int getColour()
-    {
-        return colour;
-    }
-
-    public abstract List<Coordinate> getValidCoordinates();
-
-    public boolean isValidMove(Coordinate target)
-    {
-        List<Coordinate> list = getValidCoordinates();
-        return list.contains(target);
-    }
-
-    public boolean validSquare(Coordinate coordinate)
-    {
-        if (!cs.isInside(coordinate))
-            return false;
-        Piece p = cs.getPiece(coordinate);
-        return p == null || p.getColour() != getColour();
-    }
-
-    public abstract char toChar();
-
     boolean isMoved = false;
-
-    public boolean getIsMoved()
-    {
-        return isMoved;
-    }
-
-    public void setIsMoved()
-    {
-        isMoved = true;
-    }
-
-    @Override
-    public String toString()
-    {
-        return " ";
-    }
-
-    public abstract PieceType getPieceType();
-
     private ChessSet cs;
     private Coordinate currCo;
+
 
     public Piece(ChessSet csIn, Coordinate co, int colourIn)
     {
         cs = csIn;
         currCo = co;
         colour = colourIn;
+    }
+
+
+    public int getColour()
+    {
+        return colour;
+    }
+
+    public boolean getIsMoved()
+    {
+        return isMoved;
     }
 
     public ChessSet getChessSet()
@@ -69,6 +38,49 @@ public abstract class Piece
     {
         return currCo;
     }
+
+    public abstract PieceType getPieceType();
+
+    public abstract List<Coordinate> getValidCoordinates();
+
+    public List<Coordinate> getValidCoordinatesByDirections(List<IFunc<Coordinate, Coordinate>> directions)
+    {
+        List<Coordinate> valid = new ArrayList<>();
+        for (IFunc<Coordinate, Coordinate> direction : directions)
+        {
+            Coordinate co = getCurrentCoordinate();
+            while (true)
+            {
+                co = direction.invoke(co);
+                if (!cs.isInside(co))
+                    break;
+
+                Piece p = cs.getPiece(co);
+                if (p == null)
+                {
+                    valid.add(co);
+                    continue;
+                }
+
+                if (p.getColour() != getColour())
+                    valid.add(co);
+                break;
+            }
+        }
+        return valid;
+    }
+
+
+    public void setIsMoved()
+    {
+        isMoved = true;
+    }
+
+    public void setCurrentCoordinate(Coordinate co)
+    {
+        currCo = co;
+    }
+
 
     public boolean move(int x, int y)
     {
@@ -99,35 +111,27 @@ public abstract class Piece
         unsafeMove(new Coordinate(x, y));
     }
 
-    public void setCurrentCoordinate(Coordinate co)
+
+    public boolean isValidMove(Coordinate target)
     {
-        currCo = co;
+        List<Coordinate> list = getValidCoordinates();
+        return list.contains(target);
     }
 
-    public List<Coordinate> getValidCoordinatesByDirections(List<IFunc<Coordinate, Coordinate>> directions)
+    public boolean validSquare(Coordinate coordinate)
     {
-        List<Coordinate> valid = new ArrayList<>();
-        for (IFunc<Coordinate, Coordinate> direction : directions)
-        {
-            Coordinate co = getCurrentCoordinate();
-            while (true)
-            {
-                co = direction.invoke(co);
-                if (!cs.isInside(co))
-                    break;
+        if (!cs.isInside(coordinate))
+            return false;
+        Piece p = cs.getPiece(coordinate);
+        return p == null || p.getColour() != getColour();
+    }
 
-                Piece p = cs.getPiece(co);
-                if (p == null)
-                {
-                    valid.add(co);
-                    continue;
-                }
 
-                if (p.getColour() != getColour())
-                    valid.add(co);
-                break;
-            }
-        }
-        return valid;
+    public abstract char toChar();
+
+    @Override
+    public String toString()
+    {
+        return " ";
     }
 }

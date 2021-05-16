@@ -11,6 +11,7 @@ public class ChessSet
 
     Piece[][] chessSet = new Piece[WIDTH][HEIGHT];
 
+
     public ChessSet(boolean needInit)
     {
         if (!needInit)
@@ -48,24 +49,6 @@ public class ChessSet
         this(true);
     }
 
-    public Piece getPiece(int x, int y)
-    {
-        return chessSet[x][y];
-    }
-
-    public Piece getPiece(Coordinate coordinate)
-    {
-        return getPiece(coordinate.getX(), coordinate.getY());
-    }
-
-    public boolean isInside(Coordinate coordinate)
-    {
-        if (coordinate.getX() < 0 || coordinate.getX() >= this.getWidth())
-            return false;
-        if (coordinate.getY() < 0 || coordinate.getY() >= this.getHeight())
-            return false;
-        return true;
-    }
 
     public int getWidth()
     {
@@ -76,6 +59,56 @@ public class ChessSet
     {
         return HEIGHT;
     }
+
+    public Piece getPiece(int x, int y)
+    {
+        return chessSet[x][y];
+    }
+
+    public Piece getPiece(Coordinate coordinate)
+    {
+        return getPiece(coordinate.getX(), coordinate.getY());
+    }
+
+    public int getCurrentPlayer()
+    {
+        return currentPlayer;
+    }
+
+    public void setPiece(int x, int y, Piece p)
+    {
+        chessSet[x][y] = p;
+    }
+
+    public void setPiece(Coordinate co, Piece p)
+    {
+        setPiece(co.getX(), co.getY(), p);
+    }
+
+
+    public boolean isInside(Coordinate coordinate)
+    {
+        if (coordinate.getX() < 0 || coordinate.getX() >= this.getWidth())
+            return false;
+        if (coordinate.getY() < 0 || coordinate.getY() >= this.getHeight())
+            return false;
+        return true;
+    }
+
+    public boolean move(Coordinate from, Coordinate to)
+    {
+        Piece p = getPiece(from);
+        if (p == null)
+            return false;
+        if (p.getColour() != currentPlayer)
+            return false;
+
+        boolean isMoveSuccess = p.move(to);
+        if (isMoveSuccess)
+            currentPlayer = -currentPlayer;
+        return isMoveSuccess;
+    }
+
 
     @Override
     public String toString()
@@ -116,34 +149,5 @@ public class ChessSet
             sb.append("  ").append((char) ('A' + x)).append(' ');
         }
         return sb.toString();
-    }
-
-    public void setPiece(int x, int y, Piece p)
-    {
-        chessSet[x][y] = p;
-    }
-
-    public void setPiece(Coordinate co, Piece p)
-    {
-        setPiece(co.getX(), co.getY(), p);
-    }
-
-    public boolean move(Coordinate from, Coordinate to)
-    {
-        Piece p = getPiece(from);
-        if (p == null)
-            return false;
-        if (p.getColour() != currentPlayer)
-            return false;
-
-        boolean isMoveSuccess = p.move(to);
-        if (isMoveSuccess)
-            currentPlayer = -currentPlayer;
-        return isMoveSuccess;
-    }
-
-    public int getCurrentPlayer()
-    {
-        return currentPlayer;
     }
 }
