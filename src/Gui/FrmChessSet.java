@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class FrmChessSet extends JFrame implements ActionListener
 {
@@ -69,9 +70,21 @@ public class FrmChessSet extends JFrame implements ActionListener
         lblCurrentPlayer.setText("Current Player: " + Player.toString(cs.getCurrentPlayer()));
     }
 
+    public void resetColour()
+    {
+        for (int x = 0; x < 8; ++x)
+        {
+            for (int y = 0; y < 8; ++y)
+            {
+                btnPieces[x][y].setBackground((x + y) % 2 == 0 ? Color.ORANGE : Color.WHITE);
+            }
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        resetColour();
         System.out.println(e.getActionCommand());
         String[] co = e.getActionCommand().split(" ");
 
@@ -97,7 +110,19 @@ public class FrmChessSet extends JFrame implements ActionListener
             current = null;
         }
         else
-            current = next;
+        {
+            Piece p = cs.getPiece(next);
+            if (p != null && p.getColour() == cs.getCurrentPlayer())
+            {
+                current = next;
+                List<Coordinate> l = p.getValidCoordinates();
+                for (Coordinate c : l)
+                {
+                    btnPieces[c.getX()][c.getY()].setBackground(Color.GREEN);
+                }
+
+            }
+        }
         System.out.println(current);
     }
 }
