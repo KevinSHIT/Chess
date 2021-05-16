@@ -9,13 +9,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PromotionChoice extends JDialog implements ActionListener
+public class DlgPromotionChoice extends JDialog implements ActionListener
 {
     String type = "Q";
     int colour;
     ChessSet cs;
 
-    public PromotionChoice(ChessSet chessSet, int playerColour)
+    public DlgPromotionChoice(ChessSet chessSet, int playerColour)
     {
         super();
         setTitle("Promotion Choice");

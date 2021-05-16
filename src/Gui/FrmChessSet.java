@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ChessSetGui extends JFrame implements ActionListener
+public class FrmChessSet extends JFrame implements ActionListener
 {
 
     ChessSet cs;
@@ -15,7 +15,7 @@ public class ChessSetGui extends JFrame implements ActionListener
     JLabel lblCurrentPlayer = new JLabel("", JLabel.CENTER); //TODO: Current
     Coordinate current;
 
-    public ChessSetGui()
+    public FrmChessSet()
     {
         super("Chess");
         setSize(720, 720);
@@ -83,7 +83,7 @@ public class ChessSetGui extends JFrame implements ActionListener
                 if (cs.getPiece(next).getPieceType() == PieceType.Pawn &&
                         (next.getY() == 0 || next.getY() == 7))
                 {
-                    PromotionChoice pc = new PromotionChoice(cs, -cs.getCurrentPlayer());
+                    DlgPromotionChoice pc = new DlgPromotionChoice(cs, -cs.getCurrentPlayer());
                     Piece p = pc.getPiece();
                     p.setCurrentCoordinate(next);
                     cs.setPiece(next, p);
