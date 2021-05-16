@@ -1,9 +1,6 @@
 package Pieces;
 
-import ADT.ChessSet;
-import ADT.Coordinate;
-import ADT.Piece;
-import ADT.PieceType;
+import ADT.*;
 import Foundamental.Player;
 
 import java.util.ArrayList;

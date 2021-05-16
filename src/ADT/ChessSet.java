@@ -1,6 +1,5 @@
 package ADT;
 
-
 import Foundamental.Player;
 import Pieces.*;
 
