@@ -85,6 +85,7 @@ public class FrmChessSet extends JFrame implements ActionListener
                 {
                     DlgPromotionChoice pc = new DlgPromotionChoice(cs, -cs.getCurrentPlayer());
                     Piece p = pc.getPiece();
+                    pc.dispose(); // FIXME: Manually GC
                     p.setCurrentCoordinate(next);
                     cs.setPiece(next, p);
                 }
