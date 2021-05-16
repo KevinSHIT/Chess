@@ -10,7 +10,7 @@ FIXME: BlueJ may also face font miss.
 
 | System | Situation |
 | :----: | :-------: |
-| Windows 10 x64 (en-GB) | Failed |
+| Windows 10 x64 (en-GB) | OK |
 | Debian 10 x64 (with xfce) | OK |
 | macOS | Unknown |
 
