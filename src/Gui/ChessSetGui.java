@@ -3,6 +3,7 @@ package Gui;
 import ADT.ChessSet;
 import ADT.Coordinate;
 import ADT.Piece;
+import ADT.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,7 @@ public class ChessSetGui extends JFrame implements ActionListener
 
     ChessSet cs;
     JButton[][] btnPieces = new JButton[8][8];
+    JLabel lblCurrentPlayer = new JLabel("", JLabel.CENTER); //TODO: Current
     Coordinate current;
 
     public ChessSetGui()
@@ -23,6 +25,7 @@ public class ChessSetGui extends JFrame implements ActionListener
         cs = new ChessSet();
 
         setSize(720, 720);
+
         setLayout(new GridLayout(8, 8));
 
         for (int y = 8 - 1; y >= 0; --y)
@@ -37,6 +40,10 @@ public class ChessSetGui extends JFrame implements ActionListener
                 add(btnPieces[x][y]);
             }
         }
+
+        lblCurrentPlayer.setFont(new Font("Segoe UI", Font.BOLD, 24));
+
+       // addItemToPanel(pnl,lblCurrentPlayer, 8, 1, 2, 1, 0,0,0,0);
 
         flush();
 
@@ -55,6 +62,7 @@ public class ChessSetGui extends JFrame implements ActionListener
                 btnPieces[x][y].setText(s);
             }
         }
+        lblCurrentPlayer.setText("Current Player: " + Player.toString(cs.getCurrentPlayer()));
     }
 
     @Override

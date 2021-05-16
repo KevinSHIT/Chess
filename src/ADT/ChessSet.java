@@ -141,4 +141,9 @@ public class ChessSet
             currentPlayer = -currentPlayer;
         return isMoveSuccess;
     }
+
+    public int getCurrentPlayer()
+    {
+        return currentPlayer;
+    }
 }
