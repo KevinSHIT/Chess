@@ -1,2 +1,8 @@
 out
 .idea
+
+# Prevent BlueJ pollution
+*.ctxt
+*.class
+**/*.ctxt
+**/*.class
