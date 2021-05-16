@@ -42,13 +42,13 @@ public class FrmChessSet extends JFrame implements ActionListener
             }
         }
 
-        // FIXME: WRONG ORDER
-        for (int x = 0; x <= 8; ++x)
+        for (int x = 'A' - 1; x <= 'H'; ++x)
         {
-            add(new JLabel(Character.toString((char) ('A' + x))), JLabel.CENTER);
+            String c = x < 'A' ? " " : Character.toString((char) (x));
+            add(new JLabel(c, JLabel.CENTER));
         }
 
-        lblCurrentPlayer.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        lblCurrentPlayer.setFont(new Font("Segoe UI", Font.BOLD, 24)); // FIXME: FONT
 
         // addItemToPanel(pnl,lblCurrentPlayer, 8, 1, 2, 1, 0,0,0,0);
 
