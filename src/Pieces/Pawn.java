@@ -12,10 +12,11 @@ public class Pawn extends Piece
         super(csIn, co, colourIn);
     }
 
-    private boolean isNoPiece(Coordinate co)
+
+    @Override
+    public PieceType getPieceType()
     {
-        ChessSet cs = getChessSet();
-        return cs.getPiece(co) == null;
+        return PieceType.Pawn;
     }
 
     @Override
@@ -54,6 +55,14 @@ public class Pawn extends Piece
         return l;
     }
 
+
+    private boolean isNoPiece(Coordinate co)
+    {
+        ChessSet cs = getChessSet();
+        return cs.getPiece(co) == null;
+    }
+
+
     @Override
     public char toChar()
     {
@@ -66,11 +75,5 @@ public class Pawn extends Piece
         if (getColour() == Player.WHITE)
             return "♙";
         return "♟";
-    }
-
-    @Override
-    public PieceType getPieceType()
-    {
-        return PieceType.Pawn;
     }
 }

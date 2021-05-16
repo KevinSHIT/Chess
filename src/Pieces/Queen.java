@@ -7,11 +7,14 @@ import java.util.List;
 
 public class Queen extends Piece
 {
+    List<IFunc<Coordinate, Coordinate>> direct;
+
 
     public Queen(ChessSet csIn, Coordinate co, int colourIn)
     {
         super(csIn, co, colourIn);
     }
+
 
     @Override
     public List<Coordinate> getValidCoordinates()
@@ -20,26 +23,10 @@ public class Queen extends Piece
     }
 
     @Override
-    public char toChar()
-    {
-        return 'Q';
-    }
-
-    @Override
-    public String toString()
-    {
-        if (getColour() == Player.WHITE)
-            return "♕";
-        return "♛";
-    }
-
-    @Override
     public PieceType getPieceType()
     {
         return PieceType.Queen;
     }
-
-    List<IFunc<Coordinate, Coordinate>> direct;
 
     private List<IFunc<Coordinate, Coordinate>> getDirections()
     {
@@ -57,4 +44,20 @@ public class Queen extends Piece
         }
         return direct;
     }
+
+
+    @Override
+    public char toChar()
+    {
+        return 'Q';
+    }
+
+    @Override
+    public String toString()
+    {
+        if (getColour() == Player.WHITE)
+            return "♕";
+        return "♛";
+    }
+
 }

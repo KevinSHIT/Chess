@@ -13,6 +13,12 @@ public class King extends Piece
     }
 
     @Override
+    public PieceType getPieceType()
+    {
+        return PieceType.King;
+    }
+
+    @Override
     public List<Coordinate> getValidCoordinates()
     {
         List<Coordinate> l = new ArrayList<>();
@@ -58,6 +64,7 @@ public class King extends Piece
 
         return valid;
     }
+
 
     private boolean isValidCastling(Coordinate kingCo, Coordinate castleCo)
     {
@@ -108,26 +115,6 @@ public class King extends Piece
         }
     }
 
-    @Override
-    public char toChar()
-    {
-        return 'K';
-    }
-
-    @Override
-    public String toString()
-    {
-        if (getColour() == Player.WHITE)
-            return "♔";
-        return "♚";
-    }
-
-    @Override
-    public PieceType getPieceType()
-    {
-        return PieceType.King;
-    }
-
     public boolean willBeChecked(Coordinate coordinate)
     {
         // TODO
@@ -175,5 +162,20 @@ public class King extends Piece
 
         setIsMoved();
         return true;
+    }
+
+
+    @Override
+    public char toChar()
+    {
+        return 'K';
+    }
+
+    @Override
+    public String toString()
+    {
+        if (getColour() == Player.WHITE)
+            return "♔";
+        return "♚";
     }
 }

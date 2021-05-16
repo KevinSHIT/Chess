@@ -12,6 +12,13 @@ public class Knight extends Piece
         super(csIn, co, colourIn);
     }
 
+
+    @Override
+    public PieceType getPieceType()
+    {
+        return PieceType.Knight;
+    }
+
     @Override
     public List<Coordinate> getValidCoordinates()
     {
@@ -35,12 +42,12 @@ public class Knight extends Piece
         return valid;
     }
 
+
     @Override
     public char toChar()
     {
         return 'N';
     }
-
 
     @Override
     public String toString()
@@ -50,9 +57,4 @@ public class Knight extends Piece
         return "♞";
     }
 
-    @Override
-    public PieceType getPieceType()
-    {
-        return PieceType.Knight;
-    }
 }

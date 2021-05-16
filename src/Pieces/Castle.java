@@ -12,11 +12,34 @@ public class Castle extends Piece
         super(csIn, co, colourIn);
     }
 
+    List<IFunc<Coordinate, Coordinate>> direct;
+
+
+    private List<IFunc<Coordinate, Coordinate>> getDirections()
+    {
+        if (direct == null)
+        {
+            direct = new ArrayList<>();
+            direct.add(new Directions.Up());
+            direct.add(new Directions.Down());
+            direct.add(new Directions.Left());
+            direct.add(new Directions.Right());
+        }
+        return direct;
+    }
+
+    @Override
+    public PieceType getPieceType()
+    {
+        return PieceType.Castle;
+    }
+
     @Override
     public List<Coordinate> getValidCoordinates()
     {
         return getValidCoordinatesByDirections(getDirections());
     }
+
 
     @Override
     public char toChar()
@@ -30,26 +53,5 @@ public class Castle extends Piece
         if (getColour() == Player.WHITE)
             return "♖";
         return "♜";
-    }
-
-    @Override
-    public PieceType getPieceType()
-    {
-        return PieceType.Castle;
-    }
-
-    List<IFunc<Coordinate, Coordinate>> direct;
-
-    private List<IFunc<Coordinate, Coordinate>> getDirections()
-    {
-        if (direct == null)
-        {
-            direct = new ArrayList<>();
-            direct.add(new Directions.Up());
-            direct.add(new Directions.Down());
-            direct.add(new Directions.Left());
-            direct.add(new Directions.Right());
-        }
-        return direct;
     }
 }
