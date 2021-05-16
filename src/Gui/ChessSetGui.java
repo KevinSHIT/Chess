@@ -19,11 +19,10 @@ public class ChessSetGui extends JFrame implements ActionListener
     public ChessSetGui()
     {
         super("Chess");
-        setSize(720, 720);
 
         cs = new ChessSet();
 
-
+        setSize(720, 720);
         setLayout(new GridLayout(8, 8));
 
         for (int y = 8 - 1; y >= 0; --y)
@@ -31,7 +30,7 @@ public class ChessSetGui extends JFrame implements ActionListener
             for (int x = 0; x < 8; ++x)
             {
                 btnPieces[x][y] = new JButton();
-                btnPieces[x][y].setFont(new Font("Segoe UI Symbol", Font.BOLD, 32));
+                btnPieces[x][y].setFont(new Font("Segoe UI Symbol", Font.BOLD, 32)); //TODO
                 btnPieces[x][y].setActionCommand(x + " " + y);
                 btnPieces[x][y].addActionListener(this);
                 btnPieces[x][y].setFocusPainted(false);
@@ -64,7 +63,7 @@ public class ChessSetGui extends JFrame implements ActionListener
         System.out.println(e.getActionCommand());
         String[] co = e.getActionCommand().split(" ");
 
-        Coordinate next = new Coordinate(Integer.valueOf(co[0]), Integer.valueOf(co[1]));
+        Coordinate next = new Coordinate(Integer.parseInt(co[0]), Integer.parseInt(co[1]));
 
         if (current != null)
         {

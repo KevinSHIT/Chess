@@ -38,8 +38,10 @@ public class King extends Piece
             valid.add(c);
         }
 
-        boolean isLeftValid = isValidCastling(getChessSet(), getCurrentCoordinate(), new Coordinate(0, getCurrentCoordinate().getY()));
-        boolean isRightValid = isValidCastling(getChessSet(), getCurrentCoordinate(), new Coordinate(7, getCurrentCoordinate().getY()));
+        l = null; // GC l
+
+        boolean isLeftValid = isValidCastling(getCurrentCoordinate(), new Coordinate(0, getCurrentCoordinate().getY()));
+        boolean isRightValid = isValidCastling(getCurrentCoordinate(), new Coordinate(7, getCurrentCoordinate().getY()));
 
         if (isLeftValid)
         {
@@ -57,10 +59,11 @@ public class King extends Piece
         return valid;
     }
 
-    private static boolean isValidCastling(ChessSet cs, Coordinate kingCo, Coordinate castleCo)
+    private boolean isValidCastling(Coordinate kingCo, Coordinate castleCo)
     {
         try
         {
+            ChessSet cs = getChessSet();
             if (kingCo.getY() != castleCo.getY())
             {
                 return false;

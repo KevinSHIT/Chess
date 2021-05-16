@@ -46,7 +46,6 @@ public class ChessSet
     public ChessSet()
     {
         this(true);
-
     }
 
     public Piece getPiece(int x, int y)

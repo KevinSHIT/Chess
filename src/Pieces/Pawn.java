@@ -42,7 +42,6 @@ public class Pawn extends Piece
         if (getChessSet().isInside(attackLeft) && getChessSet().getPiece(attackLeft) != null && getChessSet().getPiece(attackLeft).getColour() != getColour())
         {
             l.add(attackLeft);
-
         }
 
         if (getChessSet().isInside(attackRight) && getChessSet().getPiece(attackRight) != null && getChessSet().getPiece(attackRight).getColour() != getColour())
