@@ -1,4 +1,6 @@
-package Record;
+package Test;
+
+import Record.Record;
 
 public class RecordTest
 {

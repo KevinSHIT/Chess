@@ -1,5 +1,7 @@
-package ADT;
+package Test;
 
+import ADT.ChessSet;
+import ADT.Coordinate;
 import Foundamental.Player;
 import Pieces.Bishop;
 import Pieces.Castle;
