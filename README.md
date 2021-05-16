@@ -6,6 +6,14 @@ Set BlueJ to UTF-8 in order to compiler.
 
 FIXME: BlueJ may also face font miss.
 
+## Font Issue
+
+| System | Situation |
+| :----: | :-------: |
+| Windows 10 x64 (en-GB) | Failed |
+| Debian 10 x64 (with xfce) | OK |
+| macOS | Unknown |
+
 ## NDA
 
 Any collaborator is forbidden to show the code of this repository to the public except to share it with collaborators within this repository.
