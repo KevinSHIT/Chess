@@ -26,12 +26,17 @@ public class ChessSetGui extends JFrame implements ActionListener
 
         setSize(720, 720);
 
-        setLayout(new GridLayout(8, 8));
+        // FIXME: Loss 1 col
+        setLayout(new GridLayout(9, 9));
 
         for (int y = 8 - 1; y >= 0; --y)
         {
             for (int x = 0; x < 8; ++x)
             {
+                if (x == 0)
+                {
+                    add(new JLabel(Integer.toString(y)));
+                }
                 btnPieces[x][y] = new JButton();
                 btnPieces[x][y].setFont(new Font("Segoe UI Symbol", Font.BOLD, 32)); //TODO
                 btnPieces[x][y].setActionCommand(x + " " + y);
