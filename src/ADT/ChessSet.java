@@ -21,9 +21,9 @@ public class ChessSet
             chessSet[i][1] = new Pawn(this, new Coordinate(i, 1), Player.WHITE);
         }
         chessSet[0][0] = new Castle(this, new Coordinate(0, 0), Player.WHITE);
-        // chessSet[1][0] = new Knight(this, new Coordinate(1, 0), Player.WHITE);
-        // chessSet[2][0] = new Bishop(this, new Coordinate(2, 0), Player.WHITE);
-        // chessSet[3][0] = new Queen(this, new Coordinate(3, 0), Player.WHITE);
+        chessSet[1][0] = new Knight(this, new Coordinate(1, 0), Player.WHITE);
+        chessSet[2][0] = new Bishop(this, new Coordinate(2, 0), Player.WHITE);
+        chessSet[3][0] = new Queen(this, new Coordinate(3, 0), Player.WHITE);
         chessSet[4][0] = new King(this, new Coordinate(4, 0), Player.WHITE);
         chessSet[5][0] = new Bishop(this, new Coordinate(5, 0), Player.WHITE);
         chessSet[6][0] = new Knight(this, new Coordinate(6, 0), Player.WHITE);
