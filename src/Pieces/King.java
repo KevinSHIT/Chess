@@ -165,11 +165,15 @@ public class King extends Piece
             getChessSet().setPiece(co, this);
             getChessSet().setPiece(getCurrentCoordinate(), null);
             setCurrentCoordinate(co);
+
+            setIsMoved();
             return true;
         }
         getChessSet().setPiece(co, this);
         getChessSet().setPiece(getCurrentCoordinate(), null);
         setCurrentCoordinate(co);
+
+        setIsMoved();
         return true;
     }
 }
