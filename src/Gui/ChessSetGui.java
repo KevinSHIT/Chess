@@ -28,27 +28,29 @@ public class ChessSetGui extends JFrame implements ActionListener
 
         // FIXME: Loss 1 col
         setLayout(new GridLayout(9, 9));
-
         for (int y = 8 - 1; y >= 0; --y)
         {
+            add(new JLabel(Integer.toString(y + 1), JLabel.CENTER));
             for (int x = 0; x < 8; ++x)
             {
-                if (x == 0)
-                {
-                    add(new JLabel(Integer.toString(y)));
-                }
                 btnPieces[x][y] = new JButton();
                 btnPieces[x][y].setFont(new Font("Segoe UI Symbol", Font.BOLD, 32)); //TODO
                 btnPieces[x][y].setActionCommand(x + " " + y);
                 btnPieces[x][y].addActionListener(this);
                 btnPieces[x][y].setFocusPainted(false);
+                btnPieces[x][y].setBackground((x + y) % 2 == 0 ? Color.ORANGE : Color.WHITE);
                 add(btnPieces[x][y]);
             }
         }
 
+        for (int x = 0; x <= 8; ++x)
+        {
+            add(new JLabel(Character.toString((char) ('A' + x))), JLabel.CENTER);
+        }
+
         lblCurrentPlayer.setFont(new Font("Segoe UI", Font.BOLD, 24));
 
-       // addItemToPanel(pnl,lblCurrentPlayer, 8, 1, 2, 1, 0,0,0,0);
+        // addItemToPanel(pnl,lblCurrentPlayer, 8, 1, 2, 1, 0,0,0,0);
 
         flush();
 
