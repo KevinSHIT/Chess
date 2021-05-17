@@ -142,7 +142,7 @@ public class FrmChessSet extends JFrame implements ActionListener
                 {
                     btnPieces[c.getX()][c.getY()].setBackground(Color.GREEN);
                 }
-
+                btnPieces[current.getX()][current.getY()].setBackground(Color.CYAN);
             }
         }
         System.out.println(current);
