@@ -22,7 +22,8 @@ public class Record
 
     public void add(RecordItem ri)
     {
-        list.add(ri);
+        if (ri != null)
+            list.add(ri);
     }
 
 
