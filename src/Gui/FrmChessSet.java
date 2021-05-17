@@ -2,7 +2,6 @@ package Gui;
 
 import ADT.*;
 import Record.*;
-import jdk.nashorn.internal.objects.NativeRegExpExecResult;
 
 import javax.swing.*;
 import java.awt.*;
@@ -87,6 +86,14 @@ public class FrmChessSet extends JFrame implements ActionListener
                 btnPieces[x][y].setBackground((x + y) % 2 == 0 ? Color.ORANGE : Color.WHITE);
             }
         }
+    }
+
+    public void restartGame()
+    {
+        record = new Record();
+        cs = new ChessSet();
+        resetColour();
+        flush();
     }
 
     @Override
