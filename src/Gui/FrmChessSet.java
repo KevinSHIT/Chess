@@ -99,7 +99,7 @@ public class FrmChessSet extends JFrame implements ActionListener
             boolean b = cs.move(current, next);
             if (b)
             {
-                RecordItem ri = new RecordItem(cs.getPiece(next) , current, next, "");
+                RecordItem ri = new RecordItem(cs.getPiece(next), current, next, "");
 
                 if (cs.getPiece(next).getPieceType() == PieceType.Pawn &&
                         (next.getY() == 0 || next.getY() == 7))
@@ -111,7 +111,16 @@ public class FrmChessSet extends JFrame implements ActionListener
                     cs.setPiece(next, p);
                     ri.setNote("=" + p.toChar());
                 }
-                record.add(ri);
+
+                if (cs.getPiece(next).getPieceType() == PieceType.King)
+                {
+                    if (next.getX() - current.getX() == -2)
+                        record.addCastling(true);
+                    else if (next.getX() - current.getX() == 2)
+                        record.addCastling(false);
+                }
+                else
+                    record.add(ri);
                 System.out.println(record);
             }
             flush();
