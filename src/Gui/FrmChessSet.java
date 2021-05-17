@@ -31,7 +31,9 @@ public class FrmChessSet extends JFrame implements ActionListener
 
         for (int y = 8 - 1; y >= 0; --y)
         {
-            add(new JLabel(Integer.toString(y + 1), JLabel.CENTER));
+            JLabel lblNum = new JLabel(Integer.toString(y + 1), JLabel.CENTER);
+            lblNum.setFont(new Font(lblNum.getFont().getFontName(), Font.BOLD, 32));
+            add(lblNum);
             for (int x = 0; x < 8; ++x)
             {
                 btnPieces[x][y] = new JButton();
@@ -49,7 +51,9 @@ public class FrmChessSet extends JFrame implements ActionListener
         for (int x = 'A' - 1; x <= 'H'; ++x)
         {
             String c = x < 'A' ? " " : Character.toString((char) (x));
-            add(new JLabel(c, JLabel.CENTER));
+            JLabel lblLetter = new JLabel(c, JLabel.CENTER);
+            lblLetter.setFont(new Font(lblLetter.getFont().getFontName(), Font.BOLD, 32));
+            add(lblLetter);
         }
 
         lblCurrentPlayer.setFont(new Font("Segoe UI", Font.BOLD, 24)); // FIXME: FONT
