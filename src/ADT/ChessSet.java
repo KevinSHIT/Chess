@@ -109,6 +109,22 @@ public class ChessSet
         return isMoveSuccess;
     }
 
+    public <T> T assume(Coordinate from, Coordinate to, IFunc<T, ChessSet> func)
+    {
+        Piece toP = getPiece(to);
+        Piece fromP = getPiece(from);
+        setPiece(to, fromP);
+        setPiece(from, null);
+        fromP.setCurrentCoordinate(to);
+
+        T result = func.invoke(this);
+
+        setPiece(from, fromP);
+        fromP.setCurrentCoordinate(from);
+        setPiece(to, toP);
+        return result;
+    }
+
 
     @Override
     public String toString()
