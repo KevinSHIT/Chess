@@ -62,7 +62,9 @@ public class DlgPromotionChoice extends JDialog implements ActionListener
         switch (type)
         {
             case "C":
-                return new Castle(cs, null, colour);
+                Castle c  = new Castle(cs, null, colour);
+                c.setIsMoved();
+                return c;
             case "Q":
                 return new Queen(cs, null, colour);
             case "N":
