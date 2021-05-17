@@ -1,6 +1,8 @@
 package Gui;
 
 import ADT.*;
+import Record.*;
+import jdk.nashorn.internal.objects.NativeRegExpExecResult;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +13,7 @@ import java.util.List;
 public class FrmChessSet extends JFrame implements ActionListener
 {
 
+    Record record;
     ChessSet cs;
     JButton[][] btnPieces = new JButton[8][8];
     JLabel lblCurrentPlayer = new JLabel("", JLabel.CENTER); //TODO: Current
@@ -24,6 +27,7 @@ public class FrmChessSet extends JFrame implements ActionListener
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         cs = new ChessSet();
+        record = new Record();
 
         for (int y = 8 - 1; y >= 0; --y)
         {
@@ -95,6 +99,8 @@ public class FrmChessSet extends JFrame implements ActionListener
             boolean b = cs.move(current, next);
             if (b)
             {
+                RecordItem ri = new RecordItem(cs.getPiece(next) , current, next, "");
+
                 if (cs.getPiece(next).getPieceType() == PieceType.Pawn &&
                         (next.getY() == 0 || next.getY() == 7))
                 {
@@ -103,7 +109,10 @@ public class FrmChessSet extends JFrame implements ActionListener
                     pc.dispose(); // FIXME: Manually GC
                     p.setCurrentCoordinate(next);
                     cs.setPiece(next, p);
+                    ri.setNote("=" + p.toChar());
                 }
+                record.add(ri);
+                System.out.println(record);
             }
             flush();
             System.out.println(b);

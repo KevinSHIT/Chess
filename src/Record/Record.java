@@ -12,10 +12,7 @@ public class Record
 
     public void add(Piece p, Coordinate from, Coordinate to, String note)
     {
-        list.add(new RecordItem(p.toChar(),
-                convertToRecordString(from),
-                convertToRecordString(to),
-                note));
+        list.add(new RecordItem(p, from, to, note));
     }
 
     public void add(char p, String from, String to, String note)
@@ -23,15 +20,11 @@ public class Record
         list.add(new RecordItem(p, from, to, note));
     }
 
-    public  void add(RecordItem ri)
+    public void add(RecordItem ri)
     {
         list.add(ri);
     }
 
-    public String convertToRecordString(Coordinate c)
-    {
-        return (char) ('A' + c.getX()) + Integer.toString(c.getY());
-    }
 
     public String toCsv()
     {
