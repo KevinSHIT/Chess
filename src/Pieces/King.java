@@ -3,6 +3,7 @@ package Pieces;
 import ADT.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class King extends Piece
@@ -45,6 +46,9 @@ public class King extends Piece
         }
 
         l = null; // GC l
+
+        if (underChecked())
+            return valid;
 
         boolean isLeftValid = isValidCastling(getCurrentCoordinate(), new Coordinate(0, getCurrentCoordinate().getY()));
         boolean isRightValid = isValidCastling(getCurrentCoordinate(), new Coordinate(7, getCurrentCoordinate().getY()));
@@ -117,13 +121,109 @@ public class King extends Piece
 
     public boolean willBeChecked(Coordinate coordinate)
     {
-        // TODO
-        return false;
+        return getChessSet().assume(getCurrentCoordinate(), coordinate, new CheckKingState(coordinate));
+    }
+
+    private class CheckKingState implements IFunc<Boolean, ChessSet>
+    {
+        Coordinate target;
+
+        public CheckKingState(Coordinate targetIn)
+        {
+            target = targetIn;
+        }
+
+        @Override
+        public Boolean invoke(ChessSet chessSet)
+        {
+            return ((King) chessSet.getPiece(target)).underChecked();
+        }
+    }
+
+    public boolean isOppositePiece(Coordinate co, PieceType pt)
+    {
+        ChessSet cs = getChessSet();
+        if (!cs.isInside(co))
+            return false;
+        Piece p = cs.getPiece(co);
+        if (p == null || p.getColour() == getColour() || p.getPieceType() != pt)
+            return false;
+        return true;
     }
 
     public boolean underChecked()
     {
+        System.out.println("***** CHECK CHECK! -> " + getColour());
+        Coordinate c1 = new Coordinate(getCurrentCoordinate().getX() + 1, getCurrentCoordinate().getY() + getColour());
+        Coordinate c2 = new Coordinate(getCurrentCoordinate().getX() - 1, getCurrentCoordinate().getY() + getColour());
+        if (isOppositePiece(c1, PieceType.Pawn) || isOppositePiece(c2, PieceType.Pawn))
+            return true;
+
+        List<IFunc<Coordinate, Coordinate>> direct = new ArrayList<>();
+        direct.add(new Directions.Up());
+        direct.add(new Directions.Down());
+        direct.add(new Directions.Left());
+        direct.add(new Directions.Right());
+        if (underChecked(direct, PieceType.Castle, PieceType.Queen))
+            return true;
+
+        direct.clear();
+        direct = new ArrayList<>();
+        direct.add(new Directions.CrossLeftDown());
+        direct.add(new Directions.CrossLeftUp());
+        direct.add(new Directions.CrossRightDown());
+        direct.add(new Directions.CrossRightUp());
+        if (underChecked(direct, PieceType.Bishop, PieceType.Queen))
+            return true;
+
+        List<Coordinate> l = new ArrayList<>();
+        l.add(new Coordinate(getCurrentCoordinate().getX() + 2, getCurrentCoordinate().getY() + 1));
+        l.add(new Coordinate(getCurrentCoordinate().getX() + 2, getCurrentCoordinate().getY() - 1));
+        l.add(new Coordinate(getCurrentCoordinate().getX() - 2, getCurrentCoordinate().getY() + 1));
+        l.add(new Coordinate(getCurrentCoordinate().getX() - 2, getCurrentCoordinate().getY() - 1));
+        l.add(new Coordinate(getCurrentCoordinate().getX() + 1, getCurrentCoordinate().getY() + 2));
+        l.add(new Coordinate(getCurrentCoordinate().getX() + 1, getCurrentCoordinate().getY() - 2));
+        l.add(new Coordinate(getCurrentCoordinate().getX() - 1, getCurrentCoordinate().getY() + 2));
+        l.add(new Coordinate(getCurrentCoordinate().getX() - 1, getCurrentCoordinate().getY() - 2));
+
+        for (Coordinate co : l)
+        {
+            if (isOppositePiece(co, PieceType.Knight))
+                return true;
+        }
+
+        System.out.println("->FALSE");
+
         // TODO:
+        return false;
+    }
+
+    public boolean underChecked(List<IFunc<Coordinate, Coordinate>> directions, PieceType... types)
+    {
+        ChessSet cs = getChessSet();
+        List<PieceType> l = Arrays.asList(types);
+        for (IFunc<Coordinate, Coordinate> direction : directions)
+        {
+            Coordinate co = getCurrentCoordinate();
+            while (true)
+            {
+                co = direction.invoke(co);
+                if (!cs.isInside(co))
+                    break;
+
+                Piece p = cs.getPiece(co);
+                if (p == null)
+                {
+                    continue;
+                }
+
+                if (p.getColour() == getColour())
+                    break;
+
+                if (p.getColour() != getColour() && l.contains(p.getPieceType()))
+                    return true;
+            }
+        }
         return false;
     }
 
