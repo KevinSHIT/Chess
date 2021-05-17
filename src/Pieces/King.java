@@ -153,7 +153,7 @@ public class King extends Piece
 
     public boolean underChecked()
     {
-        System.out.println("***** CHECK CHECK! -> " + getColour());
+        System.out.println("***** CHECK CHECK! -> " + getColour() + " -> " + getCurrentCoordinate().toString());
         Coordinate c1 = new Coordinate(getCurrentCoordinate().getX() + 1, getCurrentCoordinate().getY() + getColour());
         Coordinate c2 = new Coordinate(getCurrentCoordinate().getX() - 1, getCurrentCoordinate().getY() + getColour());
         if (isOppositePiece(c1, PieceType.Pawn) || isOppositePiece(c2, PieceType.Pawn))
@@ -208,6 +208,8 @@ public class King extends Piece
             while (true)
             {
                 co = direction.invoke(co);
+
+                System.out.println(co);
                 if (!cs.isInside(co))
                     break;
 
@@ -220,8 +222,10 @@ public class King extends Piece
                 if (p.getColour() == getColour())
                     break;
 
-                if (p.getColour() != getColour() && l.contains(p.getPieceType()))
-                    return true;
+
+                if (!l.contains(p.getPieceType()))
+                    break;
+                return true;
             }
         }
         return false;

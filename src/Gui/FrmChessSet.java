@@ -96,6 +96,22 @@ public class FrmChessSet extends JFrame implements ActionListener
         flush();
     }
 
+    public Coordinate findKing(int playerColour)
+    {
+        for (int x = 0; x < 8; ++x)
+        {
+            for (int y = 0; y < 8; ++y)
+            {
+                Piece p = cs.getPiece(x, y);
+                if (p == null)
+                    continue;
+                if (p.getColour() == playerColour && p.getPieceType() == PieceType.King)
+                    return p.getCurrentCoordinate();
+            }
+        }
+        return null;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -135,6 +151,15 @@ public class FrmChessSet extends JFrame implements ActionListener
                 System.out.println(record);
             }
             flush();
+           /* Coordinate kingCo = findKing(cs.getCurrentPlayer());
+            if (kingCo != null)
+            {
+                King k = (King) cs.getPiece(kingCo);
+                if (k.underChecked())
+                    btnPieces[kingCo.getX()][kingCo.getY()].setBackground(Color.RED);
+            }
+            */
+
             System.out.println(b);
             current = null;
         }
