@@ -19,14 +19,14 @@ NDA will be valid until 06/06/2021 00:00 UTC.
             - [x] ~~Promotion~~ Done in GUI
             - [x] Castling
             - [ ] ~~Passerby~~
-        - [ ] Check Detection
+        - [x] Check Detection
         - [ ] Checkmate Detection
         - [ ] Draw Detection
         - [ ] Recorder
     - [ ] GUI
-        - [ ] Valid Movement
+        - [x] Valid Movement
         - [ ] Game Choice
-        - [ ] Promotion Dialog
+        - [x] Promotion Dialog
 
 ## Font Issue
 
